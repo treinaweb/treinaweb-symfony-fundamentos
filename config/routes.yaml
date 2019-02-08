@@ -2,6 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-lista:
-  path: /lista
-  controller: App\Controller\TaskController::index
+# lista:
+#   path: /lista
+#   controller: App\Controller\TaskController::index
