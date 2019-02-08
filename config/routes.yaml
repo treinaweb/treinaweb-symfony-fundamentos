@@ -7,5 +7,6 @@ index:
   controller: App\Controller\TaskController::index
 
 show:
-  path: /tasks/{id<\d+>}
+  path: /tasks/show/{id?10}
   controller: App\Controller\TaskController::show
+
