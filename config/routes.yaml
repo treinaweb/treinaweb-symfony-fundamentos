@@ -7,6 +7,7 @@ index:
   controller: App\Controller\TaskController::index
   methods: [GET, POST]
   schemes: [HTTPS]
+  host: tarefas.test
 
 show:
   path: /tasks/show/{id}
