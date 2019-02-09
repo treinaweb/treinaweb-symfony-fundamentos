@@ -5,8 +5,8 @@
 index:
   path: /tasks
   controller: App\Controller\TaskController::index
+  methods: [GET, POST]
 
 show:
-  path: /tasks/show/{id?10}
+  path: /tasks/show/{id}
   controller: App\Controller\TaskController::show
-
