@@ -6,6 +6,7 @@ index:
   path: /tasks
   controller: App\Controller\TaskController::index
   methods: [GET, POST]
+  schemes: [HTTPS]
 
 show:
   path: /tasks/show/{id}
