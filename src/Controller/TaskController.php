@@ -11,7 +11,10 @@ class TaskController
      */
     public function index(\Twig_Environment $twig)
     {
-        $content = $twig->render("index.html.twig");
+        $content = $twig->render("index.html.twig", [
+            "escola" => "Treinaweb Cursos",
+            "curso"  => "Symfony"
+        ]);
 
         return new Response($content);
     }
