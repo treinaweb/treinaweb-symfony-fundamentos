@@ -9,9 +9,11 @@ class TaskController
     /**
      * Lista as tarefas do sistema
      */
-    public function index()
+    public function index(\Twig_Environment $twig)
     {
-        return new Response("Retorna lista de tarefas");
+        $content = $twig->render("index.html.twig");
+
+        return new Response($content);
     }
 
     /**
