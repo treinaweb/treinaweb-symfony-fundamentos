@@ -1,13 +1,9 @@
-<h1>Escola: {{ escola }}</h1>
-<h1>Curso: {{ curso }}</h1>
+{% extends "base.html.twig" %}
 
-{% if curso == "Symfony" %}
-    <p>Curso de Symfony</p>
-    <p>ótima escolha</p>
-{% else %}
-    <p>Não sei qual curso está fazendo</p>
-{% endif %}
+{% block title %}
+    Lista de tarefas
+{% endblock %}
 
-{% for item in cursos %}
-    <li>{{ item.name }}</li>
-{% endfor %}    
+{% block body %}
+    Minha escola é {{ escola }}
+{% endblock %}
