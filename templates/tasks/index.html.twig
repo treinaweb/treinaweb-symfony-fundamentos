@@ -1,0 +1,13 @@
+<h1>Escola: {{ escola }}</h1>
+<h1>Curso: {{ curso }}</h1>
+
+{% if curso == "Symfony" %}
+    <p>Curso de Symfony</p>
+    <p>ótima escolha</p>
+{% else %}
+    <p>Não sei qual curso está fazendo</p>
+{% endif %}
+
+{% for item in cursos %}
+    <li>{{ item.name }}</li>
+{% endfor %}    
