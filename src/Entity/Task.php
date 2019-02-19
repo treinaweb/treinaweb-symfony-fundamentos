@@ -4,72 +4,54 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-class Task 
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
+ */
+class Task
 {
     /**
-     * @ORM\Id
-     * @ORM\GenerateValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", Length=100)
+     * @ORM\Column(type="string", length=100)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", Length=500)
+     * @ORM\Column(type="text")
      */
     private $description;
 
-    /**
-     * pegar valor do id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * pegar valor do title
-     *
-     * @return integer
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * setar valor no title
-     *
-     * @param int $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
     }
-    
-    /**
-     * pegar valor do description
-     *
-     * @return integer
-     */
-    public function getDescription()
+
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * setar valor no description
-     *
-     * @param int $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-    }    
+
+        return $this;
+    }
 }
