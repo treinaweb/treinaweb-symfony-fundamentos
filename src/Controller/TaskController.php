@@ -35,8 +35,14 @@ class TaskController
     /**
      * Mostra tarefa especifica
      */
-    public function show($id)
+    public function show($id, EntityManagerInterface $entityManager)
     {
+        $repository = $entityManager->getRepository(Task::class);
+
+        $task = $repository->find($id);
+
+        var_dump($task);
+
         return new Response("Mostrando a tarefa " . $id);
     }
 
