@@ -11,22 +11,14 @@ class TaskController
     /**
      * Lista as tarefas do sistema
      */
-    public function index(\Twig_Environment $twig)
+    public function index(\Twig_Environment $twig, EntityManagerInterface $entityManager)
     {
+        $repository = $entityManager->getRepository(Task::class);
+
+        $tasks = $repository->findAll();
+
         $content = $twig->render("tasks/index.html.twig", [
-            "escola" => "Treinaweb Cursos",
-            "curso"  => "Laravel",
-            "cursos" => [
-                0 => [
-                    "name" => "Laravel"
-                ],
-                1 => [
-                    "name" => "Symfony"
-                ],
-                2 => [
-                    "name" => "AWS"
-                ],
-            ]
+            "tasks" => $tasks
         ]);
 
         return new Response($content);
