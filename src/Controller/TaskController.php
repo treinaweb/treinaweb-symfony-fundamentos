@@ -27,15 +27,17 @@ class TaskController
     /**
      * Mostra tarefa especifica
      */
-    public function show($id, EntityManagerInterface $entityManager)
+    public function show($id, \Twig_Environment $twig, EntityManagerInterface $entityManager)
     {
         $repository = $entityManager->getRepository(Task::class);
 
         $task = $repository->find($id);
 
-        var_dump($task);
+        $content = $twig->render("tasks/show.html.twig", [
+            "task" => $task
+        ]);
 
-        return new Response("Mostrando a tarefa " . $id);
+        return new Response($content);
     }
 
     /**
