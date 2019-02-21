@@ -5,23 +5,22 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Task;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class TaskController 
+class TaskController extends AbstractController
 {
     /**
      * Lista as tarefas do sistema
      */
-    public function index(\Twig_Environment $twig, EntityManagerInterface $entityManager)
+    public function index(EntityManagerInterface $entityManager)
     {
         $repository = $entityManager->getRepository(Task::class);
 
         $tasks = $repository->findAll();
 
-        $content = $twig->render("tasks/index.html.twig", [
+        return $this->render("tasks/index.html.twig", [
             "tasks" => $tasks
         ]);
-
-        return new Response($content);
     }
 
     /**
