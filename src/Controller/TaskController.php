@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Task;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TaskController extends AbstractController
 {
@@ -38,7 +38,7 @@ class TaskController extends AbstractController
      *
      * @return void
      */
-    public function create()
+    public function create(): Response
     {
         $task = new Task;
         $task->setTitle("Visitar o cliente X");
@@ -49,6 +49,8 @@ class TaskController extends AbstractController
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return new Response("Registro criado com sucesso id: " . $task->getId());
+        $url = $this->generateUrl("tasks_show", ["id" => $task->getId()]);
+        return new RedirectResponse($url);
+        //return new Response("Registro criado com sucesso id: " . $task->getId());
     }
 }
