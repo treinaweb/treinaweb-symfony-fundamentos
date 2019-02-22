@@ -5,8 +5,6 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TaskController extends AbstractController
 {
@@ -25,16 +23,8 @@ class TaskController extends AbstractController
     /**
      * Mostra tarefa especifica
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        $repository = $this->getDoctrine()->getManager()->getRepository(Task::class);
-
-        $task = $repository->find($id);
-
-        if (!$task) {
-            throw $this->createNotFoundException("Tarefa não encontrada");
-        }
-
         return $this->render("tasks/show.html.twig", [
             "task" => $task
         ]);
