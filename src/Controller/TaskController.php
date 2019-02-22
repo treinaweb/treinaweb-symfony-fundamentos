@@ -12,31 +12,25 @@ class TaskController extends AbstractController
     /**
      * Lista as tarefas do sistema
      */
-    public function index(EntityManagerInterface $entityManager)
+    public function index()
     {
-        $repository = $entityManager->getRepository(Task::class);
-
-        $tasks = $repository->findAll();
+        $repository = $this->getDoctrine()->getManager()->getRepository(Task::class);
 
         return $this->render("tasks/index.html.twig", [
-            "tasks" => $tasks
+            "tasks" => $repository->findAll()
         ]);
     }
 
     /**
      * Mostra tarefa especifica
      */
-    public function show($id, \Twig_Environment $twig, EntityManagerInterface $entityManager)
+    public function show($id)
     {
-        $repository = $entityManager->getRepository(Task::class);
+        $repository = $this->getDoctrine()->getManager()->getRepository(Task::class);
 
-        $task = $repository->find($id);
-
-        $content = $twig->render("tasks/show.html.twig", [
-            "task" => $task
+        return $this->render("tasks/show.html.twig", [
+            "task" => $repository->find($id)
         ]);
-
-        return new Response($content);
     }
 
     /**
@@ -44,13 +38,14 @@ class TaskController extends AbstractController
      *
      * @return void
      */
-    public function create(EntityManagerInterface $entityManager)
+    public function create()
     {
         $task = new Task;
         $task->setTitle("Visitar o cliente X");
         $task->setDescription("Visitar o cliente X por razão X");
         $task->setScheduling(new \DateTime());
 
+        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($task);
         $entityManager->flush();
 
