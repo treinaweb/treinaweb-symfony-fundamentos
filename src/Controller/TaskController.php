@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class TaskController extends AbstractController
 {
@@ -31,21 +32,26 @@ class TaskController extends AbstractController
     }
 
     /**
-     * Inserir uma tarefa
+     * Cria uma nova tarefa
      *
-     * @return void
+     * @param Request $request
+     * @return Response
      */
-    public function create(): Response
+    public function new(Request $request): Response
     {
-        $task = new Task;
-        $task->setTitle("Visitar o cliente X");
-        $task->setDescription("Visitar o cliente X por razão X");
-        $task->setScheduling(new \DateTime());
+        if ($request->isMethod("POST")) {
+            $task = new Task;
+            $task->setTitle("Visitar o cliente X");
+            $task->setDescription("Visitar o cliente X por razão X");
+            $task->setScheduling(new \DateTime());
+    
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($task);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute("tasks_show", ["id" => $task->getId()]);
+        }
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($task);
-        $entityManager->flush();
-
-        return $this->redirectToRoute("tasks_show", ["id" => $task->getId()]);
+        return $this->render("tasks/form.html.twig");
     }
 }
