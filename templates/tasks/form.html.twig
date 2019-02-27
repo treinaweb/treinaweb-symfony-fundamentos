@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="col-sm-12">
-    <form action="http://tarefas.test/tasks/new" method="POST">
+    <form action="{{ url('tasks_new') }}" method="POST">
         <div class="form-group">
             <label for="title">Título</label>
             <input type="text" class="form-control" name="title" placeholder="Título">
@@ -17,6 +17,7 @@
         </div>
         
         <button type="submit" class="btn btn-primary">Gravar</button>
+        <a href="{{ url("tasks_index") }}" class="btn btn-default">Voltar</a>
     </form>
 </div>
 {% endblock %}
