@@ -52,6 +52,20 @@ class TaskController extends AbstractController
             return $this->redirectToRoute("tasks_show", ["id" => $task->getId()]);
         }
 
-        return $this->render("tasks/form.html.twig");
+        return $this->render("tasks/new.html.twig");
+    }
+
+    /**
+     * Editamos as tarefas
+     *
+     * @param Request $request
+     * @param Task $task
+     * @return Response
+     */
+    public function edit(Request $request, Task $task): Response
+    {
+        return $this->render("tasks/edit.html.twig", [
+            "task" => $task
+        ]);
     }
 }

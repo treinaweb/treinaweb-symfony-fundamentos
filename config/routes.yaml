@@ -18,3 +18,9 @@ tasks_new:
   path: /tasks/new
   controller: App\Controller\TaskController::new
   methods: [GET, POST]  
+
+tasks_edit:
+  path: /{id}/edit
+  controller: App\Controller\TaskController::edit
+  methods: [GET, POST]
+
