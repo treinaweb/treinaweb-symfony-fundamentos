@@ -64,6 +64,15 @@ class TaskController extends AbstractController
      */
     public function edit(Request $request, Task $task): Response
     {
+        if ($request->isMethod("POST")) {
+            $task->setTitle($request->request->get("title"));
+            $task->setDescription($request->request->get("description"));
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute("tasks_show", ["id" => $task->getId()]);
+        }
+
         return $this->render("tasks/edit.html.twig", [
             "task" => $task
         ]);
