@@ -77,4 +77,19 @@ class TaskController extends AbstractController
             "task" => $task
         ]);
     }
+
+    /**
+     * Apaga tarefas do banco de dados
+     *
+     * @param Task $task
+     * @return Response
+     */
+    public function delete(Task $task): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($task);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("tasks_index");
+    }
 }
