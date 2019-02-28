@@ -10,9 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 class TaskController extends AbstractController
 {
     /**
-     * Lista as tarefas do sistema
+     * Lista tarefas do banco de dados
+     *
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         $repository = $this->getDoctrine()->getManager()->getRepository(Task::class);
 
@@ -21,10 +23,14 @@ class TaskController extends AbstractController
         ]);
     }
 
+
     /**
-     * Mostra tarefa especifica
+     * Mostra uma tarefa especifica
+     *
+     * @param Task $task
+     * @return Response
      */
-    public function show(Task $task)
+    public function show(Task $task): Response
     {
         return $this->render("tasks/show.html.twig", [
             "task" => $task
@@ -32,7 +38,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * Cria uma nova tarefa
+     * Cria uma nova tarefa no banco de dados
      *
      * @param Request $request
      * @return Response
@@ -55,8 +61,9 @@ class TaskController extends AbstractController
         return $this->render("tasks/new.html.twig");
     }
 
+
     /**
-     * Editamos as tarefas
+     * Edita uma tarefa no banco de dados
      *
      * @param Request $request
      * @param Task $task
@@ -79,7 +86,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * Apaga tarefas do banco de dados
+     * Apaga uma tarefa no banco de dados
      *
      * @param Task $task
      * @return Response
