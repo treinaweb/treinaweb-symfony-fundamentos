@@ -2,6 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
 tasks_index:
   path: /tasks
   controller: App\Controller\TaskController::index
